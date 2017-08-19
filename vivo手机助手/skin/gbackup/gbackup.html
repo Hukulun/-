@@ -1,0 +1,267 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>vivo备份恢复</title>
+		<meta http-equiv="content-type" content="text/html,charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/gbackup.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/scrollstyle.css"></link>
+		
+		<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/template-native.js"></script>
+		<script type="text/javascript" src="js/gbackup.js"></script>
+
+		<!-- 全局备份备份进度显示模板-->
+		<script id="allBackupItemListTemplate" type="text/html">
+			<% for(var i=0 ; i<_dataList.length ; ++i){%>
+				<div class="item">
+					<div class=<%=_dataList[i]["id"]%>>
+						<div class="textLabel"><%=_dataList[i]["name"]%></div>
+						<div class="progress"><span class="nCount">0</span>/<span class="nTotal"><%=_dataList[i]["count"]%><span></div>
+						<div class="stateImage unStart"></div>
+					</div>
+				</div>
+			<%}%>
+		</script>
+		
+		<!-- 自定义备份数据项模板 -->
+		<script id="optionalItemTemplate" type="text/html">
+			<% for(var i=0 ; i<_dataList.length ; ++i) {%>
+				<%if(_dataList[i]["id"]=="system") {%>
+					<% continue; %>
+				<%}%>
+				<div class="backupItem">
+					<% var itemObj = _dataList[i]["list"] %>
+					<% var disabled = false %>
+					<div id=<%=_dataList[i]["id"]%> class="rootItem">
+						<input type="checkbox" class="checkAllItem"
+						<% if( _dataList[i]["count"] == 0 || ((_dataList[i]["id"] == "image" || _dataList[i]["id"] == "document" ||_dataList[i]["id"] == "video" ||_dataList[i]["id"] == "theme" 
+						||_dataList[i]["id"] == "music") && ExternalStorageState == false) || _dataList[i]["id"] == "thirdapp" && !RestoreApp){ disabled=true;%>
+							disabled = "disabled"
+						<% } %>
+						></input>
+						<div class="rootLabel">
+							<div class="name"><%=_dataList[i]["name"]%></div>
+							<% if(itemObj!="undefined"&&itemObj!=null){%>
+								<div class="triggerItem openItem"></div>
+							<%}%>
+						</div>
+						<div class="rootCount"><%=_dataList[i]["count"]%></div>
+						<div class="rootNote">
+							<div class="lastTime">&nbsp</div>
+							<div class="progressBar" style="display:none"><span class="proLabel"></span></div>
+						</div>
+					
+						<% if(itemObj!="undefined"&&itemObj!=null){%>
+							<%for (var j=0 ; j<itemObj.length ; ++j){%>
+								<div id=<%=itemObj[j]["id"]%> class="childItem">
+									<input type="checkbox" class="checkItem"
+									<% if( disabled ){%>
+										disabled = "disabled"
+									<% } %>									
+									></input>
+									<div class="childLabel">
+										<div class="name"><%=itemObj[j]["name"]%></div>
+									</div>
+									<div class="childCount">&nbsp</div>
+									<div class="childNote">
+										<div class="lastTime">&nbsp</div>
+									<!--	<div class="progressBar" style="display:none"></div>-->
+									</div>
+								</div>
+							<%}%>
+						<%}%>
+					</div>
+				</div>
+			<%}%>
+		</script>
+
+		<!-- 恢复时数据模板   -->
+		<script id="restoreItemTemplate" type="text/html">
+			<% for(var i=0 ; i<_dataList.length ; ++i) {%>
+				<div path="<%=_dataList[i]["path"]%>" class="item"><%=_dataList[i]["name"]%></div>
+			<%}%>
+		</script>
+	</head>
+	<body>
+		<div id="dialog">
+			<div id="bar">
+				<div id="icon"></div>
+				<div id="title" langtag="backup_Title_lang">{{backup_Title_lang}}</div>
+			</div>
+			<button id="closeButton"></button>
+			<div id="content">
+				<div id="checkpasswd" class="page" langtag="backup_checkpasswd_lang">
+					{{backup_checkpasswd_lang}}
+				</div>
+				<div id="selectFunPage" class="page">
+					<div id="connectState" langtag="backup_connectState_lang"><span id="connectState_text_bgcolor">{{backup_connectState_lang}}</span></div>
+					<div class="allSelection">
+						<div id="backupAllButton" class="allOpButton" langtag="backup_backupAllButton_lang">{{backup_backupAllButton_lang}}</div>
+						<div id="restoreAllbutton" class="allOpButton" langtag="backup_restoreAllbutton_lang">{{backup_restoreAllbutton_lang}}</div>
+					</div>
+					<div class="backupDataNote">
+						<div class="noteText" langtag="backup_noteText_lang">
+						{{backup_noteText_lang}}
+						</div>
+					</div>
+				</div>
+				<!--
+				<div id="backupAllPage" class="page">
+					<div class="progressAllNote">
+						<div class="progressNoteText">正在进行全局备份</div>
+						<div class="progressText">0%</div>
+					</div>
+					<div class="allProgressBar"></div>
+					<div class="backupList">
+
+						<div class="item">
+							<div class="contact">
+								<div class="textLabel">联系人</div>
+								<div class="progress">7</div>
+								<div class="stateImage done"></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="calllog">
+								<div class="textLabel">通话记录</div>
+								<div class="progress">102</div>
+								<div class="stateImage doing"></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="note">
+								<div class="textLabel">便签</div>
+								<div class="progress">102</div>
+								<div class="stateImage unStart"></div>
+							</div>
+						</div>
+					</div>
+					<div class="operatorZone">
+						<button id="allBackupCancellButton" class="gButton">取 消</button>
+						<div id="allBackupStartButton" class="gButton" style="display:none">暂 停</div>
+					</div>
+				</div>
+				-->
+				<div id="backupOptionalPage" class="page">
+					<div class="backupOptionalNote" langtag="backup_backupOptionalNote_lang">{{backup_backupOptionalNote_lang}}</div>
+					<div id="menuBar">
+						<input type="checkbox" class="allCheck"></input>
+						<div class="allTextLabel" langtag="backup_allTextLabel_lang">{{backup_allTextLabel_lang}}</div>
+						<div class="countLabel" langtag="backup_countLabel_lang">{{backup_countLabel_lang}}</div>
+						<div class="noteLabel" langtag="backup_noteLabel_lang">{{backup_noteLabel_lang}}</div>
+					</div>
+					<div id="backupOptionalItem">
+						<!--
+						<div class="backupItem">
+							<div id="contact" class="rootItem">
+								<input type="checkbox" class="checkAllItem"></input>
+								<div class="rootLabel">
+									<div class="name">联系人</div>
+									<div class="triggerItem openItem"></div>
+								</div>
+								<div class="rootCount">189</div>
+								<div class="rootNote">
+									<div class="lastTime">2014-7-31</div>
+									<div class="progressBar" style="display:none"></div>
+								</div>
+							</div>
+						</div>
+						<div class="backupItem">
+							<div id="calllog" class="rootItem">
+								<input type="checkbox" class="checkAllItem"></input>
+								<div class="rootLabel">
+									<div class="name">通话记录</div>
+									<div class="triggerItem openItem"></div>
+								</div>
+								<div class="rootCount">2002</div>
+								<div class="rootNote">
+									<div class="lastTime">2014-7-31</div>
+									<div class="progressBar" style="display:none"></div>
+								</div>
+							</div>
+						</div>
+						<div class="backupItem">
+							<div id="thirdApp" class="rootItem">
+								<input type="checkbox" class="checkAllItem"></input>
+								<div class="rootLabel">
+									<div class="name">第三方应用程序</div>
+									<div class="triggerItem openItem"></div>
+								</div>
+								<div class="rootCount">2002</div>
+								<div class="rootNote">
+									<div class="lastTime">2014-7-31</div>
+									<div class="progressBar" style="display:none"></div>
+								</div>
+							</div>
+							<div id="com.vivo.tel"class="childItem">
+								<input type="checkbox" class="checkItem"></input>
+								<div class="childLabel">
+									<div class="name">电话</div>
+								</div>
+								<div class="childCount">&nbsp</div>
+								<div class="childNote">
+									<div class="lastTime">2014-7-31</div>
+									<div class="progressBar" style="display:none"></div>
+								</div>
+							</div>
+							<div id="com.tecent.qq"class="childItem">
+								<input type="checkbox" class="checkItem"></input>
+								<div class="childLabel">
+									<div class="name">QQ</div>
+								</div>
+								<div class="childCount">&nbsp</div>
+								<div class="childNote">
+									<div class="lastTime">2014-7-31</div>
+									<div class="progressBar" style="display:none"></div>
+								</div>
+							</div>
+						</div>
+						-->
+					</div>
+					<div class="optionalPath">
+						<div class="label" langtag="backup_label_lang">{{backup_label_lang}}</div>
+						<input class="path" disabled="true" value=""></input>
+						<button id="backupOptionalPathButton" class="gButton" langtag="backup_OptionalPathButton_lang">{{backup_OptionalPathButton_lang}}</button>
+					</div>
+					<div class="operatorZone">
+						<button id="optionaBackupCancellButton" class="gButton" langtag="backup_optionaCancelButton_lang">{{backup_optionaCancelButton_lang}}</button>
+						<button id="optionalBackupStartButton" class="gButton" disabled langtag="backup_optionaStartButton_lang">{{backup_optionaStartButton_lang}}</button>
+					</div>
+				</div>
+
+				<div id="restoreAllPage" class="page">
+					<div class="restoreAllNote" langtag="backup_restoreAllNote_lang">{{backup_restoreAllNote_lang}} <div id="allRestoreStartButton" style="color:#ff0000" langtag="backup_allRestoreStartButton_lang">{{backup_allRestoreStartButton_lang}}</div></div>
+					<!--
+					<div class="progressAllNote" style="display:none;">
+						<div class="progressNoteText">正在进行全局恢复</div>
+						<div class="progressText">0%</div>
+					</div>
+					-->
+					<div class="allProgressBar" style="display:none;"></div>
+					<div class="restoreAllItemList">
+						<!--
+						<div path="C:\windows\vivo X3L (2014-8-15).vbak" class="item">vivo X3L (2014-8-15).vbak</div>
+						<div path="C:\windows\vivo X3V (2014-8-14).vbak" class="item">vivo X3V (2014-8-14).vbak</div>
+						<div id="retoreAllPathButton" class="gButton">浏 览</div>
+						-->
+					</div>
+					<div class="operatorZone">
+					    <button id="retoreAllPathButton" class="gButton" langtag="backup_retoreAllPathButton_lang">{{backup_retoreAllPathButton_lang}}</button>
+						<div style="height: 26px;line-height: 26px;width: 120px;float: left;">
+							<label>
+								<input type="checkbox" id="oldformat" style="float: left;margin-top: 6px;margin-left: 20px;"/>
+								<div style="float:left">{{backup_oldformat_lang}}</div>
+							</label>
+						</div>
+						<button id="allRestoreCancellButton" class="gButton" langtag="backup_allRestoreCancellButton_lang">{{backup_allRestoreCancellButton_lang}}</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div id="tip"></div>
+		
+	</body>
+</html>

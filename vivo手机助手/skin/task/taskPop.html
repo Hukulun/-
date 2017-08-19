@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="../css/scrollstyle.css" type="text/css" />
+    <link rel="stylesheet" href="task.css" type="text/css" />
+        
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/webkitBase.js" type="text/javascript"></script>
+    <script src="taskPop.js" type="text/javascript"></script>
+
+    <!-- 拖动文件处理方方式-->
+    <script src="../js/fileDrag.js" type="text/javascript" ></script>
+    <script src="../js/template.js" type="text/javascript" ></script>
+
+    <script id="taskPop_list_template" type="text/html">
+        <% for(var i=0 ; i<list.length ; ++i) {%>
+            <li id='<%= list[i]["id"] %>' onclick="c(this)">
+                <div class="liMid">
+                    <div class="liName"><%=list[i]["csShowText"]%></div>
+                    <div class="liProBg">
+                        <div class="liPro" style='width:<%=list[i]["nPercent"]%>%'></div>
+                    </div>
+                    <div class="liStatus"><%=list[i]["csStateProcess"]%></div>
+                </div>
+                <div class="liMenu">
+                    <%if(list[i]["isPause"]==true){%>
+                        <div class="liContinue"></div>
+                    <%}else{%>
+                        <div class="liPause<%if(list[i]["canBePause"]==false){%> disable<%}%>"></div>
+                    <%}%>
+                    <div class="liDel<%if(list[i]["canBeCancel"]==false){%> disable<%}%>"></div>
+                </div>
+            </li>
+        <%}%>
+    </script>
+    <script id="task_content_template" type="text/html">
+        <div class="liMid">
+            <div class="liName"><%=taskContent["csShowText"]%></div>
+            <div class="liProBg">
+                <div class="liPro" style='width:<%=taskContent["nPercent"]%>%'></div>
+            </div>
+            <div class="liStatus"><%=taskContent["csStateProcess"]%></div>
+        </div>
+        <div class="liMenu">
+            <%if(taskContent["isPause"]==true){%>
+                <div class="liContinue"></div>
+            <%}else{%>
+                <div class="liPause<%if(taskContent["canBePause"]==false){%> disable<%}%>"></div>
+            <%}%>
+            <div class="liDel<%if(taskContent["canBeCancel"]==false){%> disable<%}%>"></div>
+        </div>
+    </script>
+</head>
+<body onselectstart="return false">
+    <div id="taskPopDlg">
+        <div id="taskPopContent">
+           <div class="menuBar">
+                <div id="openTaskDetail" onclick="openTaskDetail()" class="menu-nav"><div class="detailIcon"></div>{{taskPop_html_openTaskDetail_lang}}</div>
+                <div class="menu-nav-split"></div>
+                <div id="deleteAllTask" onclick="deleteAllTask()" class="menu-nav disable"><div class="cancelIcon"></div>{{taskPop_html_deleteAllTask_lang}}</div>
+            </div>
+            <div id="taskContent" class="popTaskContainer">
+                <div class="w-page">
+                    <ul id="popTaskList">
+                        <!--<li onclick="c(this)">
+                            <div class="liImg"></div>
+                            <div class="liMid">
+                                <div class="liName">腾讯的微信</div>
+                                <div class="liProBg"><div class="liPro" ></div></div>
+                                <div class="liStatus">231kb/25Mb</div>
+                            </div>
+                            <div class="liMenu"><div class="liDel"></div><div class="liPlay"></div></div>
+                        </li>
+                        <li onclick="c(this)">
+                            <div class="liImg"></div>
+                            <div class="liMid">
+                                <div class="liName">腾讯的微信</div>
+                                <div class="liProBg"><div class="liPro"></div></div>
+                                <div class="liStatus">231kb/25Mb</div>
+                            </div>
+                            <div class="liMenu"><div class="liDel"></div><div class="liPlay"></div></div>
+                        </li>-->
+                    </ul>
+                </div>
+            </div> 
+			<!-- _LOCN -->
+            <div class="popTaskThunder"><a href="http://open.xunlei.com/?from=vivomobilemanager" target="_blank">迅雷正在为您加速<span id="speedText">!</span></a></div>
+        </div> 
+    </div> 
+</body>
+</html>

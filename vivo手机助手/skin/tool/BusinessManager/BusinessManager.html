@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/btn.css"  type="text/css" />
+    <!-- <link rel="stylesheet" href="../../css/scrollstyle.css"  type="text/css" />   -->
+    <link rel="stylesheet" href="../../css/default.css"  type="text/css" />
+    <!-- <link rel="stylesheet" href="../../css/contextmenu.css" type="text/css" />  -->
+	<link rel="stylesheet" href="../../css/handsontable.full.css" type="text/css" />
+    <link rel="stylesheet" href="BusinessManager.css" type="text/css" />
+</head>
+<body onselectstart="return false">
+
+  <div class="dialog">
+    <div class="bar" onMouseDown="barMouseDown()">
+      <botton class="close" onMouseDown="closeMouseDown()" onClick="closeClick()"></botton>
+       <botton class="minimize" onMouseDown="MinMouseDown()" onClick="MinClick()"></botton>
+      <div class="icon"></div>
+      <div class="title">短信群发助手</div>
+    </div>
+    <div class="middle">
+        <div id="menuButtonHead" class="menu">
+          <div id="selectAll" class="button" onMouseOut="hideOpTips()" onMouseOver="showOpTips(this,'选中所有条目的复选框')"><input id="sel_all" type="checkbox" /><span>全选</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="deletePeoples" class="button" ><span class="delIcon"></span><span>删除</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="sendMessages" class="button" ><span class="messageIcon"></span><span>发送短信</span><div id="simGraphic"></div></div>
+          <div class="menu-nav-split"></div>
+          <div id="importToPhone" class="button" ><span class="inportToPhoneIcon"></span><span>导入到群组</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="smsModel" class="button" onClick="smsModel()" onMouseOut="hideOpTips()" onMouseOver="showOpTips(this,'使用%%姓名%%可以自动匹配姓名并填充到短信内容中')"><span class="messModelIcon"></span><span>短信模版</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="importFromExel" class="button" onClick="importFromExel()" onMouseOut="hideOpTips()" onMouseOver="showOpTips(this,'导入Excel文件（内容需包含表头）。<br>表中需要至少包含姓名、号码两列。<br>备注一栏可以根据需要放置内容，比如笔试成绩、学校、学历等。<br>**可参考安装目录下的《demo.xls》。')"><span class="importFromExelIcon"></span><span>导入Excel文件</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="exportToExel" class="button" onClick="exportToExel()" onMouseOut="hideOpTips()" onMouseOver="showOpTips(this,'保存全部联系人到xls文件。')"><span class="exportToExcelIcon"></span><span>导出到Excel</span></div>
+          <div class="menu-nav-split"></div>
+          <div id="refresh" class="button"  onClick="refresh()" onMouseOut="hideOpTips()" onMouseOver="showOpTips(this,'查看最新回复，默认依据原始顺序排序')"><span class="refreshIcon"></span><span>刷新</span></div>
+          <div id="setDefaultSim" class="hrefButton"><a onclick="setDefaultSim()" class="linkColor">切至sim卡2发送短信息</a></div>
+        </div><!--menuButtons end-->
+		<div id="tip">
+		1.导入Excel功能：数据需要放在excel的第一个表单，并且名称为wanted，表单第一行依次为序号、姓名、号码、发送短信内容、回复短信、备注。<br>&nbsp;&nbsp;后续各行按此表头意思填充。</br>
+		2.数据复制粘贴：如果数据是按照导入功能的模板填充则除第一行及第一列外全选复制(Ctrl+c)并粘贴(Ctrl+v)到群发助手的表格中，如果列顺序不<br>&nbsp;&nbsp;一致则需要将Excel中的按列复制并将该列粘贴到助手对应内容的列。
+		</div>
+        <div id="listRegion" >
+            <!--<div class="listHeader" >
+                <div class="header_index listHeaderElem">
+                    <input id="sel_all" type="checkbox" />
+                    <div class="header_index_text" onClick="sortByIndex()"  onmouseout="hideOpTips()" onMouseOver="showOpTips(this,'按序号排序')">序号<div class="sortGraphic"><div class="sortGraphicSel"></div></div></div>
+
+                </div>
+                <div class="listHeaderSplit"></div>
+                <div class="header_name listHeaderElem">姓名</div>
+                <div class="listHeaderSplit"></div>
+                <div class="header_number listHeaderElem">号码</div>
+                <div class="listHeaderSplit"></div>
+                <div class="header_smsText listHeaderElem">发送短信内容</div>
+                <div class="listHeaderSplit"></div>
+                <div class="header_smsRely listHeaderElem"  onclick="sortByRely()"  onmouseout="hideOpTips()" onMouseOver="showOpTips(this,'按新回复短信的排在前面')">最新回复短信<div class="sortGraphic"><div class="sortGraphicSel"></div></div></div>
+                <div class="listHeaderSplit"></div>
+                <div class="header_notes listHeaderElem"  onclick="sortByNotes()"  onmouseout="hideOpTips()" onMouseOver="showOpTips(this,'按备注排序')">备注<div class="sortGraphic"><div class="sortGraphicSel"></div></div></div>
+            </div>--><!--menuButtons end-->
+            <div id="contact_list" search="0" class="handsontable"><!-- contact_list -->
+<!--
+                <div style="padding-left:10px;height:25px;line-height:25px;">搜索到 "10" 个联系人</div>
+ -->
+<!--
+                <li class='contact-list-item' id='1'>
+                    <div class='list_index listItem'>
+                        <input class='sel_con' type="checkbox" />
+                        <div class='list_index_text'>1</div>
+                    </div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_name listItem">姓名</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_number listItem"><a href="javascript:clickConNumber(this)">号码156565659895685989898989</a></div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_smsText listItem">来自某某大学的某某某某同学，恭喜你已通过得到阿萨德发了就阿德了桑德菲杰阿乐山大佛。\n得法大飞萨菲隆的发顺丰了课件</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_smsRely listItem">最新回复短信</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_notes listItem">备qeeqwe123ffsdfsd注1132313123</div>
+                </li>
+                <li class='contact-list-item' id='Li1'>
+                    <div class='list_index listItem'>
+                        <input class='sel_con' type="checkbox" />
+                        <div class='list_index_text'>1</div>
+                    </div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_name listItem">姓名</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_number listItem"><a href="javascript:clickConNumber(this)">号码156565659895685989898989</a></div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_smsText listItem">来自某某大学的某某某某同学，恭喜你已通过得到阿萨德发了就阿德了桑德菲杰阿乐山大佛。\n得法大飞萨菲隆的发顺丰了课件</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_smsRely listItem">最新回复短信</div>
+                    <div class="listItemSplit"></div>
+                    <div class="list_notes listItem">备qeeqwe123ffsdfsd注1132313123</div>
+                </li>
+-->
+            </div><!-- contact_list end -->
+        </div><!--listRegion end-->
+    </div><!--middle end-->
+	<div class="footer">
+		<div id="footerText"></div>
+	</div>
+  </div><!--dialog end-->
+
+
+  <div id="loading" class="coverScreen"><div class="loadingImg"><img src="images/loading.gif" /></div></div>
+  <!-- <menu id="listContextMenu" class="contextmenu">
+    <li id="cmListItemEdit">
+     <div class="li">编辑</div>
+    </li>
+  </menu> -->
+
+  <!-- <textarea id="listItemInput" onselectstart="stopBubble()" placeholder="输入内容" onkeydown="itemInputKeydown(event)"></textarea> -->
+
+  <div id="textModelInputDiv" class="coverScreen">
+      <div class="dlg">
+        <div class="bar">
+            <button class="close" onClick="closeDlg()"></button>
+            <div class="icon"></div><div class="title">短信模板</div>
+        </div>
+        <textarea id="textModeInput" class="textInput" onselectstart="stopBubble()" placeholder="短信模板示例：   %%姓名%%同学,你的笔试成绩为%%备注%%，你已获得vivo智能手机2013年校园招聘会面试资格，请……。"></textarea>
+        <button id="smsModelOk" class="btn btn-blue" onClick="smsModelOk()">确定</button>
+        <button id="smsModelCancel" class="btn btn-gray" onClick="smsModelCancel()">取消</button>
+      </div>
+  </div>
+
+
+  <div id="opTips"></div>
+ 	<script src="../../js/jquery-2.0.3.min.js" type="text/javascript"></script>
+	<script src="../../js/artDialog.min.js" type="text/javascript"></script>
+	<script src="../../js/handsontable.full.js" type="text/javascript"></script>
+    <script src="BusinessManager.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>请输入密码</title>
+		<meta http-equiv="content-type" content="text/html,charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="css/pwd.css"></link>
+		<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="js/pwd.js"></script>
+	</head>
+	<body>
+		<div id="dialog">
+			<div id="bar">
+				<div id="icon"></div>
+				<div id="title" langtag="pwd_html_title_lang">{{pwd_html_title_lang}}</div>
+				<button id="closeButton" style="display:none"></button>
+			</div>
+			<div id="wrongTips"></div>
+			<div id="content">
+				<div id="textPasswd" class="passwdBox">
+					<input id="textPasswdNumber" type="password" langtag="pwd_html_input_placeholder_lang" placeholder="{{pwd_html_input_placeholder_lang}}" class="textPasswdInputBox"></input>
+					<div id="toImageZone">
+						<div id="toImageBoxLogo"></div>
+						<div id="toImageBoxLink" class="changInputBox" langtag="pwd_html_toImageBoxLink_lang">{{pwd_html_toImageBoxLink_lang}}</div>
+					</div>
+					<div id="tips">{{pwd_html_tips_lang}}</div>
+					<div id="textOperatorZone">
+						<div id="okButton" class="button" langtag="pwd_html_okButton_lang">{{pwd_html_okButton_lang}}</div>
+						<div id="cancelButton" class="button" langtag="pwd_html_cancelButton_lang">{{pwd_html_cancelButton_lang}}</div>
+					</div>
+					<div id="footer"></div>
+				</div>
+				<div id="imagePasswd" class="passwdBox">
+					<canvas id="imagePwd" width="300" height="300"></canvas>
+					<div id="imageOperatorZone">
+						<div id="toTextBoxLink" class="changInputBox"></div>
+						<input id="showLine" type="checkbox"><label langtag="pwd_html_showPath_lang">&nbsp;{{pwd_html_showPath_lang}}</label></input>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

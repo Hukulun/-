@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="../css/scrollstyle.css" type="text/css" />
+    <link rel="stylesheet" href="task.css" type="text/css" />
+        
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/webkitBase.js" type="text/javascript"></script>
+    <script src="itzDowned.js" type="text/javascript"></script>
+	<script src="../js/template.js"></script>
+
+    <!-- 拖动文件处理方方式-->
+    <script src="../js/fileDrag.js" type="text/javascript" ></script>
+
+</head>
+<body id="container" onselectstart="return false">
+    <div class="menuBar">
+        <div id="deleteTask" onclick="deleteTask(this)" class="menu-nav disable"><div class="cancelIcon"></div>删除文件</div>
+        <div class="menu-nav-split"></div>
+        <div id="openItzPath" onclick="openItzPath()" class="menu-nav"><div class="fileIcon"></div>打开主题文件夹</div>
+        <div class="menu-nav-split"></div>
+    </div>
+    <div id="taskContent" class="taskContainer">
+        <div class="w-page">
+            <div id="task_Title">
+                <div class="task_name_title"><div id="allSelect" class="sn" onmousedown="allSd(this)"></div>&nbsp;&nbsp;名称</div>
+                <div class="task_size_title"><div class="empty">&nbsp;&nbsp;</div>&nbsp;大小</div>
+                <div class="task_process_title"><div class="empty">&nbsp;&nbsp;</div>&nbsp;时间</div>
+                <div class="task_op_title"><div class="empty">&nbsp;&nbsp;</div>&nbsp;操作</div>
+            </div>
+            <ul id="taskList">
+            </ul>
+        </div>
+    </div>
+	
+	<script id="task_list_template" type="text/html">
+	<%for (var i=0;i<list.length;i++) {%>
+		<li id=<%=list[i]["id"]%> onmouseover="h(this)" onmouseout="o(this)" onmousedown="d(this)">
+		<%=setNum(i)%>
+		<%include('task_content_template')%>
+		</li>
+	<%}%>
+	</script>
+	
+	<script id="task_content_template" type="text/html">
+		<div class="task_name_li"><div class="sn" onmousedown="sd(this)"></div><div class="task_nametext_li"><%=list[num]["text"]%></div></div>
+		<div class="task_size_li"><%=list[num]["size"]%></div>
+		<div class="task_process_li"><%=list[num]["timeEnd"]%></div>
+		<div class="task_op_li">
+			<div class="task_op_li_delete" onclick="delTask(this)"><span>删除</span></div>
+		</div>
+	</script>
+	
+</body>
+</html>

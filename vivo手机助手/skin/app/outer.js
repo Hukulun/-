@@ -1,0 +1,1 @@
+var outerFunction={};outerFunction.searchApp=function(b){openVivostore();var a=b.appName;searchAppFromOutside(a);$(".coverScreen").hide()};

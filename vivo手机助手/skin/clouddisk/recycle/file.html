@@ -1,0 +1,32 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="file.css" type="text/css" />
+        
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/webkitBase.js" type="text/javascript"></script>
+    <script src="file.js" type="text/javascript"></script>
+
+    <!-- 拖动文件处理方方式-->
+    <script src="../../js/fileDrag.js" type="text/javascript" ></script>
+
+</head>
+<body id="container" onselectstart="return false" onclick="hideRepeatRemind()">
+    <!-- 顶部菜单栏 -->
+    <div class="menuBar">
+        <div id="Div1" onclick="prev(this)" class="menu-nav"><div class="newFileIcon"></div>新建文件夹</div>
+        <div class="menu-nav-split"></div>
+		<!--
+        <div onclick="homePage()" class="menu-nav"><div class="uploadIcon"></div>上传</div>
+        <div class="menu-nav-split"></div>
+		-->
+        <div id="Div2" onclick="next(this)" class="menu-nav"><div class="downloadIcon"></div>下载</div>
+        <div class="menu-nav-split"></div>
+        <div onclick="more()" class="menu-nav"><div class="moreIcon"></div>更多</div>
+        <div class="menu-nav-split"></div>
+        <div onclick="refresh()" class="menu-nav"><div class="refreshIcon"></div>刷新</div>
+    </div>
+</body>
+</html>

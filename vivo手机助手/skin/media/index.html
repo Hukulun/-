@@ -1,0 +1,273 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="index.css" type="text/css" />
+	<link rel="stylesheet" href="photo/photo.css" type="text/css" />
+    <link rel="stylesheet" href="../css/scrollstyle.css" type="text/css" />
+        
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/webkitBase.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+	<script src="photoex.js" type="text/javascript"></script>
+
+</head>
+<body id="container" onselectstart="return false" <!--onmouseover="myfocus()"-->>
+    <!-- 左侧竖直栏 -->
+    <div class="sideBar">
+		<div id="sideBarCover" class="coverScreen" style="display:none;"></div>
+        <div id="phoneMedia" class="category unHover"><div class="categoryArrow"></div><div class="phoneMediaIcon"></div>手机资源管理</div>
+        <ul id="phoneMediaList" class="app_group" style="overflow:hidden;">
+<!--             <div class="phoneMediaTitle firstTitle" id="music" url="music/music.html"><div class="listIconBg music"></div>音乐管理</div>
+            <div class="liList liListShow">
+                <li class="category-list" id="music-1"><div class="listIconBg musicManager"></div><div class="fileName">全部歌曲</div><div class="listNum">(200)</div></li>
+                <li class="category-list" id="Li1"><div class="listIconBg musicManager"></div><div class="fileName">经常播放</div><div class="listNum">(200)</div></li>
+                <li class="category-list" id="Li2"><div class="listIconBg musicManager"></div><div class="fileName">最近播放</div><div class="listNum">(200)</div></li>
+                <li class="category-list" id="Li4"><div class="listIconBg musicManager"></div><div class="fileName">最近添加</div><div class="listNum">(200)</div></li>
+                <div class="newFile"><input type="text" placeholder="新建文件夹" onblur="hideEdit(this)" onkeydown="if(event.keyCode==13)this.blur();"/></div>
+                <div class="addMediaFile" onclick="showEdit(this)"><div class="listIconBg addIcon"></div>新建文件夹</div>
+            </div>
+            <div class="phoneMediaTitle" id="movie"  url="movie/movie.html"><div class="listIconBg movie"></div>视频管理</div>
+            <div class="liList">
+                <li class="category-list" id="movie-1"><div class="listIconBg movieManager"></div><div class="fileName">我的MV</div><div class="listNum">(200)</div></li>
+                <li class="category-list" id="Li6"><div class="listIconBg movieManager"></div><div class="fileName">经典影视</div><div class="listNum">(200)</div></li>
+                <div class="newFile"><input type="text" placeholder="新建文件夹" onblur="hideEdit(this)" onkeydown="if(event.keyCode==13)this.blur();"/></div>
+                <div class="addMediaFile" onclick="showEdit(this)"><div class="listIconBg addIcon"></div>新建文件夹</div>
+            </div> -->
+            <div class="phoneMediaTitle firstTitle" id="photo"  url="photo/photo.html"><div class="listIconBg photo"></div>图片管理</div>
+            <div id = "photolist"  class="liList">
+<!--                 <div class="newFile"><input type="text" placeholder="新建文件夹" onblur="hideEdit(this)" onkeydown="if(event.keyCode==13)this.blur();"/></div>
+                <div class="addMediaFile" onclick="showEdit(this)"><div class="listIconBg addIcon"></div>新建文件夹</div> -->
+            </div>
+			
+			  <!--<div id="folder_group" class="photolisttable" style="width:100%">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+			        <td id="f0" class="category-list"><div class="category-name">我的相机</div><a>( 0 )</a></td>
+                  </tr>
+                </table>
+			  </div>
+			 <div id="addFolder" class="add-category">
+                <span id="showAddFolderText">新建文件夹</span>
+                <div id="showAddFolder">
+                    <div id="addFolderInput">
+                        <input onselectstart="stopBubble()" onkeyup="newFolderInput(this)" id="addFolderInputTxt" type="text" value=""/>
+                    </div>
+                </div>
+            </div>
+<!--            <li class="category-list" id="systemApp"><div class="listIconBg"></div><div class="listIconName" id="systemli">系统应用 (20)</div></li>
+            <li class="category-list" id="canUpdateApp"><div class="listIconBg"></div><div class="listIconName" id="canUpdateli">新建播放列表</div></li>-->
+        </ul>
+		<!-- 屏蔽第三方资源下载
+        <div id="thirhMedia" class="category unHover"><div class="categoryArrow"></div><div class="thirdAppIcon"></div>多媒体下载</div>
+        <ul id="thirdMediaList" class="app_group">
+            <div class="jingpin">
+                -资源分类-
+            </div>
+            <li id="thirdMusic" class="category-list"><div class="listIconBg thirdMusic"></div><div class="listIconName">美妙音乐</div></li>
+            <li id="thirdTheme" class="category-list"><div class="listIconBg thirdTheme"></div><div class="listIconName">绚丽主题</div></li>
+            <li id="thirdMovie" class="category-list" style="display:none"><div class="listIconBg thirdMovie"></div><div class="listIconName">精彩视频</div></li>
+            <li id="thirdText" class="category-list"><div class="listIconBg thirdText"></div><div class="listIconName">电子书</div></li>
+            <li id="thirdPicture" class="category-list"><div class="listIconBg thirdPicture"></div><div class="listIconName">精美壁纸</div></li>
+            <li id="thirdRing" class="category-list  category-list-click"><div class="listIconBg thirdRing"></div><div class="listIconName">动听铃声</div></li>
+            <div class="jingpin">
+                -推荐资源-
+            </div>
+            <li id="dongting" url="http://www.dongting.com/union.html?from=vivo" class="category-list tuijian"><div class="listIconBg thirdDongting"></div><div class="listIconName">天天动听</div></li>
+            <li id="5sing" url="http://open.5sing.com/vivo/index.aspx" class="category-list tuijian" style="display:none"><div class="listIconBg third5sing"></div><div class="listIconName">5sing音乐</div></li>
+    
+            <li id="moxiubizhi" url="http://wallpaper-pea.open.moxiu.net/" class="category-list  tuijian"><div class="listIconBg thirdMoxiubizhi"></div><div class="listIconName">魔秀壁纸</div></li>
+            <li id="yanqing" url="http://www.xs8.cn/" class="category-list  tuijian"><div class="listIconBg thirdYanqing"></div><div class="listIconName">言情小说吧</div></li>
+ 
+        </ul>
+		-->
+    </div>
+    
+    <!-- 主要内容区开始 -->
+    <div id="content" class="content">
+        <div id="vivoPart">
+             <!--右侧顶部菜单栏 
+            <div class="menuBar appManager">
+                <div onclick="homePage()" class="menu-nav"><div class="homeIcon"></div>主页</div>
+                <div class="menu-nav-split"></div>
+                <div onclick="getAllHui()" class="menu-nav"><div class="homeListIcon"></div>专题汇</div>
+                <div class="menu-nav-split"></div>
+                <div id="goBack" onclick="goBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+                <div class="menu-nav-split"></div>
+                <div id="goForward" onclick="goForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+                <div class="menu-nav-split"></div>
+                <div onclick="refresh()" class="menu-nav"><div class="refreshIcon"></div></div>
+                <div class="menu-search"><input id="appSearch" onkeydown="searchApp(this)" class="inputText" type="search" placeholder="搜索网络应用" /></div>
+            </div>-->
+            <div id="vivoMediaIframe"><!--<iframe id="photoIframe" class="iframeHide iframeShow" name="myIframe"src="http://localhost:8080/home/home.html"></iframe>--></div>
+        </div>
+        <!-- 屏蔽第三方资源下载
+        <div id="thirdPart">
+            
+            <div id="thirdMusicPart" style="display:none;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div onclick="refreshThird(this)" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="MusicTab">
+                        <ul>            
+
+                            <li id="kugouMusic" url="http://topic1.kugou.com/2012/embedweb/app/?p=vivo" class="menuTabOn"><div class="menuTabIcon kugouIcon"></div>酷狗音乐</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div id="thirdMusicIframe" class="marginTop"></div>
+                
+                <div id="thirdMusicLoading" class="iframeLoading"></div>
+            </div>
+            
+            
+            <div id="thirdMoviePart"  style="display:none;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div onclick="refreshThird()" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="MovieTab">
+                        <ul>
+                        <li id="iqiyiMovie" url="http://ota.iqiyi.com/vivomini/minihome.html" class="menuTabOn"><div class="menuTabIcon feifeiIcon"></div>爱奇艺</li>
+ 
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div id="thirdMovieIframe" class="marginTop"></div>
+                
+                <div id="thirdMovieLoading" class="iframeLoading"></div>
+            </div>
+            
+            
+            <div id="thirdTextPart"  style="display:none;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div onclick="refreshThird(this)" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="TextTab">
+                        <ul>
+                            <li id="yanqingText" url="http://www.xs8.cn/mobile/wandoujia/" style="display:none;"><div class="menuTabIcon yanqingIcon"></div>言情小说</li>
+                            <li id="huanxiaText" url="http://hezuo.huanxia.com/peashux/index.html" style="display:none;"><div class="menuTabIcon huanxiaIcon"></div>幻侠小说</li>
+                            <li id="hongxiuText" url="http://hezuo.hongxiu.com/peas/index.html" class="menuTabOn"><div class="menuTabIcon hongxiuIcon"></div>红袖添香</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div id="thirdTextIframe" class="marginTop"></div>
+                
+                <div id="thirdTextLoading" class="iframeLoading"></div>
+            </div>
+            
+            
+            <div id="thirdPicturePart" style="display:none;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div onclick="refreshThird(this)" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="PictureTab">
+                        <ul>
+                            <li id="aibizhiPicture" url="http://partner.lovebizhi.com/vivo.php" class="menuTabOn"><div class="menuTabIcon aibizhiIcon"></div>爱壁纸</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="thirdPictureIframe" class="marginTop"></div>
+                
+                <div id="thirdPictureLoading" class="iframeLoading"></div>
+            </div>
+            
+            
+            
+            <div id="thirdThemePart" style="display:none;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+					<div class="menu-nav-split"></div>
+                    <div onclick="refreshThird()" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="ThemeTab">
+                        <ul>
+                            <li id="moxiuTheme" url="http://vivo.open.moxiu.net" class="menuTabOn"><div class="menuTabIcon moxiuIcon"></div>魔秀主题</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="thirdThemeIframe" class="marginTop"></div>
+                
+                <div id="thirdThemeLoading" class="iframeLoading"></div>
+            </div>  
+            
+            
+             <div id="thirdRingPart" style="display: block;">
+                <div class="menuBar appManager">
+                    <div id="thirdGoBack" onclick="thirdGoBack(this)" class="menu-nav disable"><div class="prevIcon"></div></div>
+                    <div class="menu-nav-split"></div>
+                    <div  id="thirdGoForward" onclick="thirdGoForward(this)" class="menu-nav disable"><div class="nextIcon"></div></div>
+                    <div class="menu-nav-split"></div>
+                    <div onclick="refreshThird()" class="menu-nav"><div class="refreshIcon"></div></div>
+                    <div class="menu-tab" id="RingTab">
+                        <ul>
+                            <li id="kuyinRing" url="http://vivoapp.kuyinxiu.com/" class="menuTabOn"><div class="menuTabIcon kuyinIcon"></div>酷音铃声</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="thirdRingIframe" class="marginTop"></div>
+                
+                <div id="thirdRingLoading" class="iframeLoading"></div>
+            </div>  
+            
+            
+			
+			<div class="flash-notifier" id="flash-notifier">
+	            <div class="button-close-flash-notifier" onclick='closeflashNotifier()'></div>
+	            <div left='20px' text-align='center'>您需要安装 Adobe Flash Player 才可以播放本页面的内容。请<a href='#@' onclick='_external_link_("http://download0.inner.bbk.com/vivozs/upload/install_flash_player.exe")'>下载</a>安装之后，重启软件。</div>
+            </div>
+        </div>  
+		-->
+    </div>
+            
+            
+    <!--  冒泡提示框 -->
+    <div id="downloadBubble" class="coverScreen">
+        <div id="downloadBubblePrompt" class="bubble-box arrow-top">
+            <div class="wrap" id="downloadBubbleTxt" ><div id="downloadName">应用 <span>vivo手机助手</span></div>
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已经成功添加到下载任务中！</div>
+        </div>
+    </div>
+    
+    
+    <!-- 第一次使用向导 -->
+	<!--  屏蔽多媒体下载
+    <div id="guide" class="coverScreen">
+        <div id="guidePrompt4" class="bubble-box arrow-left">
+            <div class="wrap"><div style="font-weight:bold;height:25px;">不要急，需要看一下：</div>您下载的音乐、视频、图片、电子书等非应用资源，将优先存放在</br> <span>手机存储</span> 下 <span>vivoDownload</span> 中</br>
+            如果手机存储已满，则存放在</br> <span>手机SD卡</span> 下 <span>vivoDownload</span> 中
+            
+            <div class="guideMenu">
+                <div id="notShow" class="notShow">不再提醒</div>
+                <div class="know" onclick="closeGuide(this)">知道了</div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+	-->
+	<div id="opTips"></div>
+</body>
+</html>

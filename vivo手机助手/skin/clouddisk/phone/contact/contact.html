@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="../../../css/scrollstyle.css" type="text/css" />
+    <link rel="stylesheet" href="contact.css" type="text/css" />
+        
+    <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../../js/webkitBase.js" type="text/javascript"></script>
+    <script src="contact.js" type="text/javascript"></script>
+
+</head>
+<body id="container" onselectstart="return false">
+    <!-- 顶部菜单栏 onclick="mclick(this)"-->
+    <div class="menuBar">
+        <div id="saveContacts" onclick="save()" class="menu-nav disable"><div class="export2ComIcon"></div>保存到电脑</div>
+        <div class="menu-nav-split"></div>
+        <div id="import2Phone" onclick="import2phone()" class="menu-nav disable"><div class="import2PhoneIcon"></div>导入到手机</div>
+        <div class="menu-nav-split"></div>
+        <!--<div onclick="delete()" class="menu-nav"><div class="downloadIcon"></div>删除</div>
+        <div class="menu-nav-split"></div>-->
+        <div id="refresh" onclick="refresh()" class="menu-nav disable"><div class="refreshIcon"></div>刷新</div>
+        <div class="menu-search"><input id="searchEvent" class="inputText" disabled="disabled" type="search" placeholder="搜索联系人" /></div>
+    </div>
+    <div id="contact" class="contactContainer">
+        <div id="loadding">正在加载云联系人，请稍候！</div>
+        <div id="fail">网络忙，云联系人获取失败！</div>
+        <div class="w-page">
+            <div id="contact_title">
+                <div class="contact_name"><div id="allSelect" class="sn" onmousedown="allSd(this)"></div>&nbsp;&nbsp;姓名</div>
+                <div class="contact_phone"><div class="empty"></div>&nbsp;电话</div>
+                <div class="contact_belong"><div class="empty"></div>&nbsp;归属地</div>
+            </div>
+            <ul id="contact_list">
+<!--                <li id="1" onmouseover="h(this)" onmouseout="o(this)" onmousedown="d(this)">
+                    <div class="name"><div class="sn" onmousedown="sd(this)"></div><div class="nl">蓝吉他武器qeweqeqewqewqwewwqeqw</div></div>
+                    <div class="pl">13255698452额外safdsadfasdfsadfsdf企鹅权威权213111</div>
+                    <div class="bl">广东东莞2asdfasdfasdfdasf311111 </div>
+                </li>-->
+               
+                
+            </ul>
+            <div id="leter">
+                <table cellspacing="0" cellpadding="0" height="100%">
+                    <!--<tr><td><a href="#4098">#</a></td></tr>-->
+                </table>
+            </div>
+        </div>
+        <div id="contact_detail">
+            <!--<div class="contact_menu">
+                <div id="detailEdit"class="contact_button" onclick="editCurrentContact(this)">编辑</div>
+                <div id="detailDel" class="contact_button" onclick="delCurrentContact(this)">删除</div>
+            </div>-->
+            <div id="contactHead"></div>
+            <div id="contactName" onselectstart="stopBubble();"></div>
+            <div id="contactItemDetail">
+                <!--<div class="detail_item detail_first">
+                    <div class="label_pro label_phone"></div>
+                    <div class="phone_text" onselectstart="return true">电话号码</div>
+                    <div class="phone_belong">归属地</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_email"></div>
+                    <div class="show_text">电子邮箱</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_qq"></div>
+                    <div class="show_text" onselectstart="stopBubble();">即时通信</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_addr"></div>
+                    <div class="show_text">地址</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_org"></div>
+                    <div class="show_text">组织</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_nickName"></div>
+                    <div class="show_text">昵称</div>
+                </div>
+                <div class="detail_item">
+                    <div class="label_pro label_web"></div>
+                    <div class="show_text"><a href="javascript:parent.openBrowser('http://www.vivo.com.cn')">个人主页</a></div>
+                </div>
+                <div class="detail_item detail_last">
+                    <div class="label_pro label_note"></div>
+                    <div class="show_text">备注</div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

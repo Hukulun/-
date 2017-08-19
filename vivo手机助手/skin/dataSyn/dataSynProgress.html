@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+        new Image().src = '../images/promptDialog/promptTop_bg.png';
+        new Image().src = '../images/promptDialog/promptMiddle_bg.png';
+        new Image().src = '../images/popDialog/closePop.png';
+        new Image().src = '../images/promptDialog/promptBottom_bg.png';
+        new Image().src = '../images/promptDialog/promptButton_bg.png';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../css/webkitBase.css"/>
+    <link rel="stylesheet" type="text/css" href="dataSyn.css" />
+    <style type="text/css">
+        #stop
+        {
+            display:none;
+        }
+    </style>
+
+    
+</head>
+<body  onselectstart="return false" ><!-- style="background-color:#7D7D7D" -->
+<!-- 同步提示 -->
+	<div class="dialog">
+		<div class="prompt_top" onmousedown="barMouseDown()">
+		  <div class="promptd_synIcon"></div>
+		  <div class="prompt_title">{{dataSynProgress_html_dataSyn_lang}}</div>
+		  <div id="surePrompt_close" class="close" onmousedown="closeMouseDown()"></div>
+		</div>
+		<div  class="prompt_middle">
+		<!-- 提示内容 -->
+			<div id="showDlg" class="prompt_text">
+				{{dataSynProgress_html_dataSyn_text_lang}}
+			</div>
+		</div>
+		<div class="prompt_bottom">
+		   <div id="stop" class="submitButton" style="text-align:center">{{dataSynProgress_html_stop_lang}}</div>
+		   <div id="cancel" class="submitButton" style="text-align:center">{{dataSynProgress_html_cancel_lang}}</div>
+		   <div id="continue" class="submitButton" style="text-align:center">{{dataSynProgress_html_continue_lang}}</div>
+		</div>
+	</div>
+  
+      
+    <!-- 弹出框部分
+    <div id="prompt" class="coverScreen">
+      <div class="prompt">
+        <div class="prompt_top">
+          <div class="promptd_synIcon"></div>
+          <div id="prompt_title" class="prompt_title">数据同步</div>
+          <div id="prompt_close" class="close"></div>
+        </div>
+        <div id="prompt_message" class="prompt_middle">
+            <!-- 提示内容 
+            <div class="prompt_text">
+                <table id="synProssing" class="syn-list" border="0" cellspacing="0" cellpadding="0" width="100%">
+                	<tr>
+                		<td class="synContact"></td>
+                		<td>联系人</td>
+                		<td id="synContactStatus">正在同步</td>
+                		<td id="synContactPresent">0%</td>
+                	</tr>
+                	<tr>
+                		<td class="synCalendar"></td>
+                		<td>日程</td>
+                		<td id="synCalendarStatus">正在同步</td>
+                		<td id="synCalendarPresent">0%</td>
+                	</tr>
+                </table>
+                <div class="cancelPrompt">正在同步，请耐心等待！</div>
+                <div class="import" >
+                    <div class="process_left"></div>
+                    <div id="process" class="process_center"></div>
+                    <div class="process_right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="prompt_bottom">
+           <div id="no" class="submitButton">取消</div>
+        </div>
+      </div>
+    </div>-->
+    
+        
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="dataSynProgress.js" type="text/javascript"></script>
+    <!-- 拖动文件处理方方式-->
+    <script src="../js/fileDrag.js" type="text/javascript" ></script>
+</body>
+</html>

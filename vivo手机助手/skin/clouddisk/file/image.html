@@ -1,0 +1,144 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="../../css/scrollstyle.css" type="text/css" />
+    <link rel="stylesheet" href="file.css" type="text/css" />
+        
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/webkitBase.js" type="text/javascript"></script>
+    <script src="image.js" type="text/javascript"></script>
+
+</head>
+<body id="container">
+    <div id="mainContents">
+        <!-- 顶部菜单栏 -->
+        <div class="menuBar">
+			<!--
+            <div id="upLoad" onclick="upLoad(this)" class="menu-nav"><div class="uploadIcon"></div>上传</div>
+            <div class="menu-nav-split"></div>
+			-->
+            <div id="downLoad" onclick="downLoad(this)" class="menu-nav"><div class="downloadIcon"></div>下载</div>
+            <div class="menu-nav-split"></div>
+            <div id="deleteFiles" onclick="deleteFiles(this)" class="menu-nav"><div class="delIcon"></div>删除</div>
+            <div class="menu-nav-split"></div>
+            <div id="more" onclick="more(this)" class="menu-nav"><div class="moreIcon"></div>更多</div>
+            <div class="menu-nav-split"></div>
+            <div id="refresh" onclick="refresh(this)" class="menu-nav"><div class="refreshIcon"></div>刷新</div>
+<!-- 
+            <div class="menu-search"><input id="searchApp" class="inputText" type="search" placeholder="文件搜索" /></div>
+ -->
+            <div id="listStyleBtn" class="listStyleBtn">
+                <div id="listStyle" class="listStyle"></div>
+                <div id="listStyleNor" class="listStyleNor"></div>
+                <div id="blockStyle" class="blockStyle"></div>
+                <div id="blockStyleNor" class="blockStyleNor"></div>
+            </div>
+        </div>
+        <div id="cateName" class="catItem"><div class="hidedCatPath">/apps/BBKCloud/</div><div class="showedCatName">全部图片&nbsp;>&nbsp;</div></div>
+        <div id="blockManager" class="manager"><div id="blockAllSelect" class="selAll" onmousedown="allSd()"></div>选择全部</div>
+        <div id="listManager" class="manager">
+            <div id="listAllSelect" class="selAll" onmousedown="allSd()"></div><span>文件名称</span>
+            <div class="editDateTitle">最后修改时间</div>
+            <div class="fileSizeTitle">大小</div>
+        </div>
+        <div id="fileList" class="blockList">
+            <ul>
+            </ul>
+        </div>
+        <div id="pcsLogoBottom" class="pcsLogoBottom"></div>
+    </div>  
+
+    <div class="streamMoreActionMenu" id="streamMoreActionMenu">
+        <div class="rcList rcListTop" id="copyActionMenu" onclick="copyActionMenu(this)">&nbsp;&nbsp;复制</div>
+        <div class="rcList rcListBottom" id="cutActionMenu" onclick="cutActionMenu(this)">&nbsp;&nbsp;剪切</div>
+    </div>
+    <div class="rClickPopMenu" id="rClickPopMenu">
+        <div class="rcList rcListTop" id="rcCopyActionMenu" onclick="rcCopyActionMenu(this)">&nbsp;&nbsp;复制</div>
+        <div class="rcList" id="rcCutActionMenu" onclick="rcCutActionMenu(this)">&nbsp;&nbsp;剪切</div>
+        <div class="rcList rcListBottom" id="rcResetFileName" onclick="rcResetFileName(this)">&nbsp;&nbsp;重命名</div>
+    </div>
+
+    <!--有标题弹出提示框 -->
+    <div id="dirNamePrompt" class="coverScreen">
+        <div class="dirNamePrompt">
+            <div class="prompt_top">
+                <div class="prompt_linkIcon"></div>
+                <div class="prompt_title">请输入文件夹名</div>
+                <div class="close"></div>
+            </div>
+            <div class="prompt_middle">
+                <div><input id="dirName" type="text" value="" placeholder="文件夹名" onkeyup=onDirnameInputSth(this)></div>
+            </div>
+            <div class="prompt_bottom">
+                <div id="cancelDirName" class="submitButton" onclick="cancelDirName(this)">取消</div>
+                <div id="confirmDirName" class="submitButton disable" onclick="confirmDirName(this)">确定</div>
+            </div>
+        </div>
+    </div>
+    <!--有标题弹出提示框 -->
+    <div id="fileNameInputPrompt" class="coverScreen"> 
+        <div id="fileNameInputDiv">
+            <input id="fileNameInput" type="text" value="" placeholder="文件名" onkeyup=onFilenameInputSth(this)>
+            <div id="fileNameConfirm" class="fileNameConfirm" onclick="fileNameConfirm(this)"></div>
+            <div id="fileNameCancel" class="fileNameCancel" onclick="fileNameCancel(this)"></div>
+        </div>
+    </div>
+    <!--有标题弹出提示框 -->
+    <div id="confirmTipPromt" class="coverScreen">
+		<div class="coverScreenMiddle">
+			<div class="tableCell">
+				<div class="dirNamePrompt">
+					<div class="prompt_top">
+						<div class="prompt_linkIcon"></div>
+						<div class="prompt_title">删除</div>
+						<div class="close"></div>
+					</div>
+					<div class="prompt_middle">
+						<div id="confirmPrompt_message">确定要删除吗？                </div>
+					</div>
+					<div class="prompt_bottom">
+						<div id="cancelDel" class="submitButton" onclick="cancelDel(this)">取消</div>
+						<div id="confirmDel" class="submitButton" onclick="confirmDel(this)">确定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div> 
+
+	<!--有标题弹出提示框 -->
+    <div id="confirmDirNameDlg" class="coverScreen">
+		<div class="coverScreenMiddle">
+			<div class="tableCell">
+				<div class="dirNamePrompt">
+					<div class="prompt_top">
+						<div class="prompt_title">提示</div>
+						<div class="close"></div>
+					</div>
+					<div class="prompt_middle">
+						<div id="confirmDirName_message"></div>
+					</div>
+					<div class="prompt_bottom">
+						<div id="confirmDirNameDlg" class="submitButton" onclick="confirmDirNameDlg(this)">确定</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div> 
+	
+    <!--  冒泡提示框 -->
+    <div id="bubble" class="coverScreen">
+      <div class="bubble">
+        <div class="bubble_top">
+        </div>
+        <div id="bubble_message" class="bubble_middle">
+            <!-- 提示内容 -->
+            <div class="bubble_text"><div class="refresh" ></div>正在加载……</div>
+        </div>
+        <div class="bubble_bottom">
+        </div>
+      </div>
+    </div> 
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/webkitBase.css" type="text/css" />
+    <link rel="stylesheet" href="need.css" type="text/css" />
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="phoneNeed.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../lib.min.js"></script>
+    <script type="text/javascript" src="../jquery.jcarousellite.min.js"></script>
+</head>
+<body onselectstart="return false">
+
+    
+     <!-- 装机必备弹出框 -->
+      <div class="phoneNeedLi">
+            <div class="install_selDate"><span>必备应用</span>&nbsp;&nbsp;&nbsp;精挑细选，给你推荐一些必备的最新高质量应用，让你的爱机强大起来！</div>
+            <ul id="phoneNeedApp_list">
+                <!--<li>
+                    <div class="pnImg"><img src="../images/appIconBg.png" onerror="errorImg(this)"/></div>
+                    <div class="pnN">土家菜肴</div>
+                    <div class="pnD">立即安装</div>
+                </li>-->
+                <div class="appPrompt">正在加载，长时间未完成，请尝试 <a style="color:#098FD4;" href="javascript:parent.refreshNeedApk()">刷 新</a></div>
+            </ul>
+            
+            <div class="install_selDate"><span>必备合集</span>&nbsp;&nbsp;&nbsp;汇聚必备精选，不错过身边的好应用，让你的爱机更特别！</div>
+            <div id="topicList">
+               <div id="appPrompt" class="appPrompt1">正在加载，长时间未完成，请尝试 <a style="color:#098FD4;" href="javascript:parent.refreshNeedApk()">刷 新</a></div>
+               <div id="appBusy" class="appBusy1">网络异常，加载失败,请尝试 <a style="color:#098FD4;" href="javascript:parent.refreshNeedApk()">刷 新</a></div>
+               <div id="prev" class="preNextHide"></div>
+                <div id="jCarouselLite" class="jCarouselLite">
+                    <ul>
+                    </ul>
+                </div>
+                <div id="next" class="preNextHide"></div>
+                <div class="clear"></div>  
+            </div>
+       </div>
+</body>
+</html>

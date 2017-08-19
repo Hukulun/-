@@ -1,0 +1,59 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../css/webkitBase.css" href="text/css">
+    <link rel="stylesheet" href="clipSync.css" type="text/css" />
+</head>
+<body onselectstart="return false">
+  <div class="dialog">
+    <div class="bar" onmousedown="barMouseDown()">
+      <div class="close" onmousedown="closeMouseDown()" onclick="closeClick()"></div>
+      <div class="icon"></div>
+      <div class="title">{{clipboard_dlg_title_lang}}</div>
+    </div>
+    <div class="middle">
+        <div class="computerClip">
+            <div class="clipPrompt">
+                {{clipboard_dlg_oncomputer_context_lang}}
+            </div>
+            <div class="clipShow">
+                <div id="computerClip" class="textShow">
+                </div>
+                <!--<textarea id="computerClip" placeholder="可直接输入内容，传送到手机"></textarea>-->
+            </div>
+        </div>
+        <div id="menuButon" class="menu">
+          <div class="button" onclick="onRefresh()"><div class="refresh">{{clipboard_dlg_refresh_lang}}</div></div>
+          <div class="button" onclick="onToPhone()"><div class="toPhone">{{clipboard_dlg_tophone_lang}}</div></div>
+          <div class="button" onclick="onToComputer()"><div class="toComputer">{{clipboard_dlg_tocomputer_lang}}</div></div>
+        </div>
+        <div id="menuLoad" class="menu">
+          <div id="loadAllClip" class="load"><img src="images/refresh.png" /><div>{{clipboard_dlg_refreshing_lang}}</div></div>
+          <div id="loadToPhone" class="load"><img src="images/toPhone.png" /><div>{{clipboard_dlg_tophoneing_lang}}</div></div>
+          <div id="loadToComputer" class="load"><img src="images/toComputer.png" /><div>{{clipboard_dlg_tocomputering_lang}}</div></div>
+        </div>
+        <div class="phoneClip">
+            <div class="clipPrompt">
+                {{clipboard_dlg_onphone_context_lang}}
+            </div>
+            <div class="clipShow">
+                <div id="phoneClip" class="textShow">
+                </div>
+            </div>
+        </div>
+        <div class="useIntro">
+              <span>&nbsp;{{clipboard_dlg_refresh_lang}}&nbsp;</span>&nbsp;{{clipboard_dlg_refresh_hint_lang}}<br />
+              <span>&nbsp;{{clipboard_dlg_tophone_lang}}&nbsp;</span>&nbsp;{{clipboard_dlg_tophone_hint_lang}}({{clipboard_dlg_hotkey_lang}}<span>Ctrl</span> + <span>Shift</span> + <span
+              id="keytophone"></span>).<br />
+              <span>&nbsp;{{clipboard_dlg_tocomputer_lang}}&nbsp;</span>&nbsp;{{clipboard_dlg_tocomputer_hint_lang}}({{clipboard_dlg_hotkey_lang}} <span>Ctrl</span> + <span>Shift</span> + <span id="keytocomputer"></span>).<br />
+        </div>
+    </div>
+  
+      <div id="load1"><img src="../../images/loading.gif" /></div>
+      <div id="load2"><img src="../../images/loading.gif" /></div>
+  </div>
+  
+    <script src="../../js/jquery-2.0.3.min.js"></script>
+    <script src="clipSync.js" type="text/javascript"></script>
+</body>
+</html>
