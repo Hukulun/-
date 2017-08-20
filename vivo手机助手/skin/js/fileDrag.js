@@ -1,1 +1,0 @@
-function dragenter(a){a.stopPropagation();a.preventDefault()}function dragover(a){a.stopPropagation();a.preventDefault()}function drop(a){a.stopPropagation();a.preventDefault()}function initDrag(){if(window.FileReader){$("html").bind("dragenter",dragenter);$("html").bind("dragover",dragover);$("html").bind("drop",drop)}}initDrag();

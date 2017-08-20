@@ -1,1 +1,0 @@
-$(document).ready(function(){$.event.props=$.event.props.join("|").replace("layerX|layerY|","").split("|")});window.onload=function(){};document.oncontextmenu=new Function("return false;");function visitThirdMarket(b,a){parent.visitThirdMarket(b,a)};
